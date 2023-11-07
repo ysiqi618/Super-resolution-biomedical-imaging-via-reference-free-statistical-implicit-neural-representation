@@ -1,0 +1,63 @@
+# Copyright (C) 2017 NVIDIA Corporation.  All rights reserved.
+# Licensed under the CC BY-NC-SA 4.0 license (https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode).
+
+# Logger options
+log_iter: 10 # 100                  # How often to log the training loss 
+val_iter: 20 #100                # How often to validate testing and save output images during training
+# image_save_iter: 2000         # How often do you want to save output images during training
+# snapshot_save_iter: 10000     # How often do you want to save trained models
+
+# Optimization options
+max_iter: 100 #5000                # Maximum number of training iterations
+batch_size: 1                 # Batch size
+loss: L2
+
+optimizer: Adam               # Optimizer for trainings
+# weight_decay: 0.0001          # Weight decay
+beta1: 0.9 # 0.5 (CT) / 0.9 (MRI)                    # Adam parameter
+beta2: 0.999                  # Adam parameter
+lr: 0.01                   # Initial learning rate
+step_size: 1000             # how often to decay learning rate
+gamma: 0.5                    # how much to decay learning rate
+weight_decay: 0 #0.00000001
+
+model: SIREN                  # Options for MLP models [FFN | SIREN]
+net:
+  network_input_size: 128     # Input size for network
+  network_output_size: 1
+  network_depth:  8 #2            # Depth of MLP layers
+  network_width: 256          # Width of MLP layers
+
+encoder:
+  embedding: gauss            #  Input embedding method
+  scale: 3 #4
+  embedding_size: 64         # Embedding size for input Fourier feature encoding
+  coordinates_size: 2
+
+ ############### LR degradation model paras ###############
+ #ker_type: Avg #average
+ # ker_size: [2,2] # [5, 5] # [9,9] #[2,2]
+ # num_of_LRs: 4  #3 #2 # 4
+offset_x: 0
+offset_y: 0
+
+
+
+
+ ############### LR degradation model paras ###############
+ #ker_type: Avg #average
+ # ker_size: [2,2] # [5, 5] # [9,9] #[2,2]
+num_of_LRs: 2  #3 #2 # 4
+
+### LR ultrasound data
+data: CCA_US
+HR_dim: [400, 400] # need downsample first. HR is [1024,1024] as well
+img_path: /home/siqi/Desktop/SR_INR_code/dataset/CCA-US-image/09-53-51-pad.tif
+is_gen_LR: 1
+downscale: 8
+isTIFF: 1
+ker_size: [5,5]   # [2,2]
+ker_type: Avg
+
+
+                                        
